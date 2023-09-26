@@ -8,11 +8,13 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/topicos")
-class TopicoController(private val service: TopicoService){
+class TopicoController(private val service: TopicoService) {
+
     @GetMapping
     fun listar(): List<TopicoView> {
-       return service.listar()
+        return service.listar()
     }
+
     @GetMapping("/{id}")
     fun buscarPorId(@PathVariable id: Long): TopicoView {
         return service.buscarPorId(id)
@@ -22,4 +24,5 @@ class TopicoController(private val service: TopicoService){
     fun cadastrar(@RequestBody @Valid dto: NovoTopicoForm) {
         service.cadastrar(dto)
     }
+
 }
