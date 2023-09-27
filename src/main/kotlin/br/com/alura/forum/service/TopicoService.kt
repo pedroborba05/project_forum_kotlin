@@ -8,8 +8,8 @@ import br.com.alura.forum.mapper.TopicoFormMapper
 import br.com.alura.forum.mapper.TopicoViewMapper
 import br.com.alura.forum.model.Topico
 import org.springframework.stereotype.Service
+import java.util.*
 import java.util.stream.Collectors
-import kotlin.collections.ArrayList
 
 @Service
 class TopicoService(
@@ -28,7 +28,7 @@ class TopicoService(
     fun buscarPorId(id: Long): TopicoView {
         val topico = topicos.stream().filter { t ->
             t.id == id
-        }.findFirst().orElseThrow { NotFoundException(notFoundMessage) }
+        }.findFirst().orElseThrow{NotFoundException(notFoundMessage)}
         return topicoViewMapper.map(topico)
     }
 
@@ -42,7 +42,7 @@ class TopicoService(
     fun atualizar(form: AtualizacaoTopicoForm): TopicoView {
         val topico = topicos.stream().filter { t ->
             t.id == form.id
-        }.findFirst().orElseThrow { NotFoundException(notFoundMessage) }
+        }.findFirst().orElseThrow{NotFoundException(notFoundMessage)}
         val topicoAtualizado = Topico(
                 id = form.id,
                 titulo = form.titulo,
@@ -60,7 +60,8 @@ class TopicoService(
     fun deletar(id: Long) {
         val topico = topicos.stream().filter { t ->
             t.id == id
-        }.findFirst().orElseThrow { NotFoundException(notFoundMessage) }
+        }.findFirst().orElseThrow{NotFoundException(notFoundMessage)}
         topicos = topicos.minus(topico)
     }
+
 }
