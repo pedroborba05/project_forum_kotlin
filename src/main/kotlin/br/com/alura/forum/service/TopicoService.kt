@@ -21,7 +21,7 @@ class TopicoService(
 ) {
 
     fun listar(): List<TopicoView> {
-        return repository.findAll().map { t ->
+        return repository.findAll().stream().map { t ->
             topicoViewMapper.map(t)
         }.collect(Collectors.toList())
     }
@@ -47,7 +47,7 @@ class TopicoService(
     }
 
     fun deletar(id: Long) {
-       repository.deleteById(id)
+        repository.deleteById(id)
     }
 
 }
